@@ -100,7 +100,7 @@ when
     UserLikedPosts( userId == $uid, $liked : postIds )
     exists(
         $plL : PostLikers( $likersL : userIds )
-        and eval( $liked != null && $liked.contains($plL.getPostId()) )
+        and eval( $liked != null && $liked.contains($plL.getPostId()) ) // samo oni koje je ranije user lijakovao
         and eval( overlap($likersC, $likersL) >= 0.7 )
     )
 then
