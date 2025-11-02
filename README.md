@@ -70,7 +70,7 @@ Implemented in `user-moderation-rules.drl` (agenda-group `user-moderation`). Use
 - >5 `ReportEvent`s in 24h → suspend posting for 24h.
 - >8 reports in 48h → suspend posting for 48h.
 - >4 `BlockEvent`s in 24h → suspend posting for 24h.
-- ≥2 blocks in 48h AND ≥4 reports in 24h → suspend login for 48h.
+- >2 blocks in 48h AND ≥4 reports in 24h → suspend login for 48h.
 - >3 blocks in 6h → suspend posting for 12h (rapid escalation).
 - >12 reports in 7d → suspend login for 72h (chronic behavior).
 
