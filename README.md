@@ -1,6 +1,6 @@
 # Social Moderation Platform - Rules Engine & Recommendations
 
-## Overview 🧭
+## Overview
 
 This repository centers on the Drools rules engine that powers recommendations and user moderation. The frontend and Spring Boot app are present but secondary; the core logic lives in the rules and facts.
 
@@ -17,7 +17,7 @@ Rules location:
   - `feed-recommend-rules.drl`
   - `user-moderation-rules.drl`
 
-## Facts (data model) 📚
+## Facts (data model)
 
 Available compiled facts under `demo.facts` include:
 - Core feed/recommendation facts: `RecommendedFeedRequest`, `FriendIds`, `CandidatePost`, `PostFact`, `PopularHashtag`, `PopularPost`, `UserFeedContext`, `UserAuthoredCount`, `SimilarUser`, `PostLikers`, `UserLikedPosts`.
@@ -26,7 +26,7 @@ Available compiled facts under `demo.facts` include:
 
 Note: Source code resides in `kjar-example/facts` (package `demo.facts`); compiled classes are visible under `kjar-example/facts/target/classes/demo/facts`.
 
-## Recommendation engine 🎯
+## Recommendation engine
 
 The recommendation logic is implemented in `feed-recommend-rules.drl` and uses agenda groups and a scoring approach over `CandidatePost` facts.
 
@@ -57,14 +57,14 @@ Scoring (agenda-group: `feed-recommend-score`):
 Output (agenda-group: `feed-recommend-output`):
 - Any `CandidatePost` with `score > 0` is appended to the `recommendFeedOut` global list.
 
-## Friends feed rules 👥
+## Friends feed rules
 
 Implemented in `feed-friends-rules.drl` (agenda-group `feed-friends-select`).
 - Selects posts authored by friends in the last 24h.
 - Excludes authors present in `BlockedIds`.
 - Uses `friendsFeedOut: List` global to collect `PostFact` results.
 
-## User moderation rules 🛡️
+## User moderation rules
 
 Implemented in `user-moderation-rules.drl` (agenda-group `user-moderation`). Uses event processing with sliding time windows:
 - >5 `ReportEvent`s in 24h → suspend posting for 24h.
@@ -76,7 +76,7 @@ Implemented in `user-moderation-rules.drl` (agenda-group `user-moderation`). Use
 
 Each rule emits a `ModerationFlag` into the `moderationFlags: List` global, including the user id, reason, scope (`POSTING` or `LOGIN`), and an expiry timestamp.
 
-## End-to-end flow 🔄
+## End-to-end flow
 
 1. Create a `KieSession` from the KJAR (classpath or Maven GAV).
 2. Set required globals (`NOW`, output lists like `recommendFeedOut`, `friendsFeedOut`, `moderationFlags`).
@@ -84,7 +84,7 @@ Each rule emits a `ModerationFlag` into the `moderationFlags: List` global, incl
 4. Focus agenda groups as needed (e.g., validate → router → score → output).
 5. Fire rules and read outputs from the global lists.
 
-## Build the KJAR ⚒️
+## Build the KJAR
 
 ```powershell
 cd kjar-example\facts
@@ -96,7 +96,7 @@ mvn clean package
 
 Artifacts are produced under `kjar-example/drools-spring-kjar/target`.
 
-## Tuning knobs ⚙️
+## Tuning knobs
 
 - Thresholds: similarity (≥0.5), likers overlap (≥0.7), recency window (24h)
 - Popularity signals: presence of `PopularPost` and `PopularHashtag`
@@ -104,7 +104,7 @@ Artifacts are produced under `kjar-example/drools-spring-kjar/target`.
 - Agenda control: use agenda-groups to orchestrate validation → routing → scoring → output
 - Event windows: moderation uses `over window:time(...)` for 6h, 24h, 48h, 7d
 
-## Testing 🧪
+## Testing 
 
 - Run all rule tests and builds:
 
