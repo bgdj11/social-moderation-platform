@@ -1,14 +1,14 @@
-# Social Moderation Platform — Rules Engine & Recommendations
+# Social Moderation Platform - Rules Engine & Recommendations
 
 ## Overview 🧭
 
 This repository centers on the Drools rules engine that powers recommendations and user moderation. The frontend and Spring Boot app are present but secondary; the core logic lives in the rules and facts.
 
 Key modules:
-- `kjar-example/facts` — fact model (POJOs) used by rules.
-- `kjar-example/drools-spring-kjar` — Drools rules (.drl) packaged as a KJAR.
-- `kjar-example/drools-spring-app` — minimal Spring Boot integration that loads and executes the KJAR.
-- `frontend/` — Angular UI (optional for understanding the engine).
+- `kjar-example/facts` - fact model (POJOs) used by rules.
+- `kjar-example/drools-spring-kjar` - Drools rules (.drl) packaged as a KJAR.
+- `kjar-example/drools-spring-app` - minimal Spring Boot integration that loads and executes the KJAR.
+- `frontend/` - Angular UI (optional for understanding the engine).
 
 Rules location:
 - `kjar-example/drools-spring-kjar/src/main/resources/sbnz/integracija/*.drl`
@@ -37,8 +37,8 @@ Inputs (insert as facts):
 - Context: `UserFeedContext` (liked/authored hashtags), `PopularPost`, `PopularHashtag`, `SimilarUser`, `PostLikers`, `UserLikedPosts`
 
 Globals:
-- `NOW: LocalDateTime` — time anchor for recency rules
-- `recommendFeedOut: List` — output collector for scored candidates
+- `NOW: LocalDateTime` - time anchor for recency rules
+- `recommendFeedOut: List` - output collector for scored candidates
 
 Strategy router (agenda-group: `feed-recommend-router`):
 - Insert `UseBase` when the user has friends or authored posts; otherwise insert `UseNew`.
