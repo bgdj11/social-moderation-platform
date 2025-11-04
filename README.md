@@ -115,7 +115,7 @@ mvn clean package
 
 - Surefire reports are generated under each module’s `target/surefire-reports`.
 
-## Minimal notes on app/UI 📉
+## Minimal notes on app/UI
 
 - Spring Boot (`drools-spring-app`) provides a thin runtime for the KJAR.
 - The Angular app is optional for understanding rules; it can call backend `/api` routes via a proxy.
